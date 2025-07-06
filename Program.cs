@@ -9,7 +9,7 @@ namespace AE_extensive_project.PerformanceTests
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             var users = LoadUsers();
 
@@ -28,8 +28,9 @@ namespace AE_extensive_project.PerformanceTests
             // Or, run all scenarios in the future:
             var scenarios = new[] {
                 //disable homepageload tes for now - it works
-                HomePageLoadTest.CreateScenario(),
-                LoginLoadTest.CreateScenario(users)
+                //HomePageLoadTest.CreateScenario(),
+                //LoginLoadTest.CreateScenario(users),
+                UserRegistrationLoadTest.CreateScenario()
             };
 
             NBomberRunner
@@ -42,10 +43,14 @@ namespace AE_extensive_project.PerformanceTests
         {
             var jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "users.json");
             var json = File.ReadAllText(jsonPath);
-            return JsonSerializer.Deserialize<List<UserCredentials>>(json, new JsonSerializerOptions
+
+            JsonSerializerOptions jsonSerializerOptions = new()
             {
                 PropertyNameCaseInsensitive = true
-            });
+            };
+            var options = jsonSerializerOptions;
+
+            return JsonSerializer.Deserialize<List<UserCredentials>>(json, options) ?? []; //new List<UserCredentials>();
         }
     }
 }
