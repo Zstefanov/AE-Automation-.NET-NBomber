@@ -1,13 +1,11 @@
 ﻿using AE_extensive_project.PerformanceTests.Models;
 using NBomber.Contracts;
 using NBomber.CSharp;
-using System.Collections.Generic;
 
 namespace AE_extensive_project.PerformanceTests.PerformanceTests
 {
     public static class LoginLoadTest
     {
-        // Remove internal loading of users; rely on passed-in users
         public static ScenarioProps CreateScenario(List<UserCredentials> users)
         {
             var scenario = Scenario.Create("login_load", async context =>

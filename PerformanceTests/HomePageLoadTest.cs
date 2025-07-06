@@ -1,5 +1,4 @@
 ﻿using NBomber.Contracts;
-using NBomber.Contracts.Stats;
 using NBomber.CSharp;
 
 namespace AE_extensive_project.PerformanceTests.PerformanceTests

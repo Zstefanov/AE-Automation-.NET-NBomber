@@ -1,8 +1,6 @@
 ﻿using AE_extensive_project.PerformanceTests.Models;
 using AE_extensive_project.PerformanceTests.PerformanceTests;
 using NBomber.CSharp;
-using System.Collections.Generic; // For List<T>
-using System.IO; // Make sure to include for File/Path
 using System.Text.Json;
 
 namespace AE_extensive_project.PerformanceTests
@@ -30,7 +28,8 @@ namespace AE_extensive_project.PerformanceTests
                 //disable homepageload tes for now - it works
                 //HomePageLoadTest.CreateScenario(),
                 //LoginLoadTest.CreateScenario(users),
-                UserRegistrationLoadTest.CreateScenario()
+                //UserRegistrationLoadTest.CreateScenario(),
+                ProductSearchLoadTest.CreateScenario(),
             };
 
             NBomberRunner

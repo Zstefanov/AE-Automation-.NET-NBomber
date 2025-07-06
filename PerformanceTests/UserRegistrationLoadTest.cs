@@ -1,7 +1,6 @@
 ﻿using NBomber.Contracts;
 using NBomber.CSharp;
 
-
 namespace AE_extensive_project.PerformanceTests.PerformanceTests
 {
     public static class UserRegistrationLoadTest
