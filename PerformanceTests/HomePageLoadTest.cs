@@ -1,15 +1,13 @@
-﻿using NBomber.Contracts.Stats;
+﻿using NBomber.Contracts;
+using NBomber.Contracts.Stats;
 using NBomber.CSharp;
 
-
-namespace AE_extensive_project.PerformanceTests
+namespace AE_extensive_project.PerformanceTests.PerformanceTests
 {
-    public class HomePageLoadTest
+    public static class HomePageLoadTest
     {
-        public static void Main(string[] args)
+        public static ScenarioProps CreateScenario()
         {
-            Console.WriteLine("NBomber test is starting...");
-
             var scenario = Scenario.Create("home_page_load", async context =>
             {
                 var response = await Step.Run("fetch_homepage", context, async () =>
@@ -22,18 +20,12 @@ namespace AE_extensive_project.PerformanceTests
 
                 return Response.Ok();
             })
-            //10 seconds warm-up period for stability and cache warming
+            // 10 seconds warm-up period for stability and cache warming
             .WithWarmUpDuration(TimeSpan.FromSeconds(10))
-            //10 simultaneous users for a 30 second duration
+            // 10 simultaneous users for a 30 second duration
             .WithLoadSimulations(Simulation.KeepConstant(10, TimeSpan.FromSeconds(30)));
 
-            NBomberRunner
-                .RegisterScenarios(scenario)
-                .WithReportFolder(@"..\..\..\bomber_reports")
-                .WithReportFormats(ReportFormat.Txt, ReportFormat.Csv, ReportFormat.Html)
-                .Run();
-
-            Console.WriteLine("NBomber test finished.");
+            return scenario;
         }
     }
 }
