@@ -6,6 +6,7 @@ Repository: https://github.com/Zstefanov/AE-Automation-.NET-NBomber
 Description:
 -------------
 This project contains performance and load tests built using NBomber, a powerful and flexible .NET library for load testing. The tests are written in C# and designed to simulate real-world scenarios to evaluate system reliability, throughput, and responsiveness.
+DATA used for accounts is not hidden, due to the nature of the project and its nature as a performance testing tool. It is intended for demonstration purposes only.
 
 Features:
 ----------

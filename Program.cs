@@ -11,11 +11,6 @@ namespace AE_extensive_project.PerformanceTests
         {
             var users = LoadUsers();
 
-            // Print file content BEFORE deserialization
-            var jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "users.json");
-            var json = File.ReadAllText(jsonPath);
-            Console.WriteLine($"File content: {json}");
-
             // Print deserialized objects
             foreach (var user in users)
                 Console.WriteLine($"- Email: '{user.Email ?? "null"}', Password: '{user.Password ?? "null"}'");
@@ -23,13 +18,13 @@ namespace AE_extensive_project.PerformanceTests
             Console.WriteLine($"Loaded {users.Count} users:");
             
 
-            // Or, run all scenarios in the future:
+            // Comment out and only run some scenarios for convenience:
             var scenarios = new[] {
-                //disable homepageload tes for now - it works
                 //HomePageLoadTest.CreateScenario(),
                 //LoginLoadTest.CreateScenario(users),
                 //UserRegistrationLoadTest.CreateScenario(),
-                ProductSearchLoadTest.CreateScenario(),
+                //ProductSearchLoadTest.CreateScenario(),
+                OrderPlacementLoadTest.CreateScenario(users)
             };
 
             NBomberRunner
