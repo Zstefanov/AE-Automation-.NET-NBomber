@@ -34,16 +34,32 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
                     new KeyValuePair<string, string>("email", user.Email),
                     new KeyValuePair<string, string>("password", user.Password)
                 });
+                
                 var loginResponse = await client.PostAsync($"{baseUrl}/api/verifyLogin", loginContent);
-                var loginBody = await loginResponse.Content.ReadAsStringAsync();
-                Console.WriteLine($"Login for {user.Email}: Status={loginResponse.StatusCode}, Body={loginBody}");
-                if (!loginResponse.IsSuccessStatusCode || !loginBody.Contains("User exists"))
-                    return Response.Fail(message: "Login failed.");
 
-                // 3. ADD PRODUCT TO CART (GET)- unclear if works, but seems to be the way to add a product
-                var addToCartResponse = await client.GetAsync($"{baseUrl}/add_to_cart/1");
-                if (!addToCartResponse.IsSuccessStatusCode)
+                var loginBody = await loginResponse.Content.ReadAsStringAsync();
+
+                if (loginResponse.IsSuccessStatusCode && loginBody.Contains("User exists"))
+                {
+                    Console.WriteLine($"LOGIN SUCCESS: {user.Email}");
+                }
+                else
+                {
+                    Console.WriteLine($"LOGIN FAILED: {user.Email} | Status: {loginResponse.StatusCode} | Body: {loginBody}");
+                    return Response.Fail();
+                }
+
+                // 3. ADD PRODUCT TO CART (GET)
+                var productId = Random.Shared.Next(1, 5); // Hardcoded product IDs from 1 to 5
+                var addToCartResponse = await client.GetAsync($"{baseUrl}/add_to_cart/{productId}");
+                if (addToCartResponse.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"Successfully added product to cart.");
+                }
+                else
+                {
                     return Response.Fail(message: "Add to cart failed.");
+                }
 
                 // 4. VIEW CART (GET)
                 var viewCartResponse = await client.GetAsync($"{baseUrl}/view_cart");
