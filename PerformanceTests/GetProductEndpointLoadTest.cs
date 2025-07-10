@@ -27,7 +27,7 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
             })
             .WithWarmUpDuration(TimeSpan.FromSeconds(5))
             .WithLoadSimulations(// 5 users, 20 seconds
-                Simulation.KeepConstant(5, TimeSpan.FromSeconds(20)) // 
+                Simulation.KeepConstant(5, TimeSpan.FromSeconds(20)) 
             );
         }
     }

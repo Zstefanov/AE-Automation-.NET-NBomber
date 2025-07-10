@@ -1,12 +1,8 @@
 ﻿using AE_extensive_project.PerformanceTests.Models;
 using NBomber.Contracts;
 using NBomber.CSharp;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace AE_extensive_project.PerformanceTests.PerformanceTests
 {

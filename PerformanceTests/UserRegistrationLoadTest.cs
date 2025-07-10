@@ -13,6 +13,7 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
                 var uniqueId = Guid.NewGuid().ToString("N")[..8];
                 var email = $"testuser_{uniqueId}@example.com";
 
+                // Hardcode repeatable data
                 var registrationData = new Dictionary<string, string>
             {
                 {"name", $"Test{uniqueId}"},
