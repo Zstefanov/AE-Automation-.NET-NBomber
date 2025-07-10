@@ -25,7 +25,8 @@ namespace AE_extensive_project.PerformanceTests
                 //UserRegistrationLoadTest.CreateScenario(),
                 //ProductSearchLoadTest.CreateScenario(),
                 //OrderPlacementLoadTest.CreateScenario(users),
-                CartOperationsLoadTest.CreateScenario(users)
+                //CartOperationsLoadTest.CreateScenario(users),
+                GetProductEndpointLoadTest.CreateScenario()
             };
 
             NBomberRunner
