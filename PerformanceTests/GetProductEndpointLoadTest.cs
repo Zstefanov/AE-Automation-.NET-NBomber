@@ -1,4 +1,5 @@
 ﻿using NBomber.Contracts;
+using NBomber.Contracts.Stats;
 using NBomber.CSharp;
 
 namespace AE_extensive_project.PerformanceTests.PerformanceTests
@@ -9,7 +10,7 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
         {
             var baseUrl = "https://automationexercise.com";
 
-            return Scenario.Create("critical_products_list", async context =>
+            var scenario = Scenario.Create("critical_products_list", async context =>
             {
                 using var client = new HttpClient();
                 var response = await client.GetAsync($"{baseUrl}/products");
@@ -27,8 +28,15 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
             })
             .WithWarmUpDuration(TimeSpan.FromSeconds(5))
             .WithLoadSimulations(// 5 users, 20 seconds
-                Simulation.KeepConstant(5, TimeSpan.FromSeconds(20)) 
+                Simulation.KeepConstant(5, TimeSpan.FromSeconds(20))
             );
+            NBomberRunner
+                .RegisterScenarios(scenario)
+                .WithReportFolder(@"..\..\..\bomber_reports")
+                .WithReportFormats(ReportFormat.Txt, ReportFormat.Html)
+                .Run();
+
+            return scenario;
         }
     }
 }
