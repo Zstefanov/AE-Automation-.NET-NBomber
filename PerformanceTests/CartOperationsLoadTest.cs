@@ -10,6 +10,7 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
         public static ScenarioProps CreateScenario(List<UserCredentials> users)
         {
             var baseUrl = "https://automationexercise.com";
+            var loginHelper = new Helpers.LoginHelper();
 
             var scenario = Scenario.Create("cart_operations", async context =>
             { 
@@ -20,18 +21,13 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
 
                 var baseUrl = "https://automationexercise.com";
 
-                // 1. LOGIN via API
-                var loginContent = new FormUrlEncodedContent(new[]
+                // 1. LOGIN via Login Helper
+                var loginSuccess = await loginHelper.LoginAsync(user, client);
+
+                if (!loginSuccess)
                 {
-                    new KeyValuePair<string, string>("email", user.Email),
-                    new KeyValuePair<string, string>("password", user.Password)
-                });
-                var loginResponse = await client.PostAsync($"{baseUrl}/api/verifyLogin", loginContent);
-                var loginBody = await loginResponse.Content.ReadAsStringAsync();
-                if (!(loginResponse.IsSuccessStatusCode && loginBody.Contains("User exists")))
-                {
-                    Console.WriteLine($"LOGIN FAILED: {user.Email} | Status: {loginResponse.StatusCode} | Body: {loginBody}");
-                    return Response.Fail(message: "Login failed.");
+                    Console.WriteLine($"LOGIN FAILED: {user.Email}");
+                    return Response.Fail(message: $"Login failed for user {user.Email}");
                 }
                 Console.WriteLine($"LOGIN SUCCESS: {user.Email}");
 
