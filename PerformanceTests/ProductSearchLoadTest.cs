@@ -38,7 +38,7 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
             .WithWarmUpDuration(TimeSpan.FromSeconds(5))
             // Simulate 20 users searching simultaneously for 30 seconds
             .WithLoadSimulations(
-                Simulation.KeepConstant(20, TimeSpan.FromSeconds(30))
+                Simulation.KeepConstant(20, TimeSpan.FromSeconds(30)) 
             );
 
             return scenario;
