@@ -1,5 +1,6 @@
 ﻿using AE_extensive_project.PerformanceTests.Models;
 using AE_extensive_project.PerformanceTests.PerformanceTests;
+using NBomber.Contracts.Stats;
 using NBomber.CSharp;
 using System.Text.Json;
 
@@ -20,17 +21,20 @@ namespace AE_extensive_project.PerformanceTests
 
             // Comment out and only run some scenarios for convenience:
             var scenarios = new[] {
-                //HomePageLoadTest.CreateScenario(),
-                //LoginLoadTest.CreateScenario(users),
+                HomePageLoadTest.CreateScenario(),
+                LoginLoadTest.CreateScenario(users),
                 //UserRegistrationLoadTest.CreateScenario(),
                 //ProductSearchLoadTest.CreateScenario(),
                 //OrderPlacementLoadTest.CreateScenario(users),
                 //CartOperationsLoadTest.CreateScenario(users),
-                GetProductEndpointLoadTest.CreateScenario()
+                //GetProductEndpointLoadTest.CreateScenario()
             };
 
             NBomberRunner
                 .RegisterScenarios(scenarios)
+                .WithReportFolder(@"..\..\..\bomber_reports")
+                .WithReportFormats(ReportFormat.Html, ReportFormat.Txt)
+                .WithReportFileName("performance_report")
                 .Run();
         }
 

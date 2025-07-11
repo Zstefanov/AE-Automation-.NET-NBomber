@@ -30,11 +30,6 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
             .WithLoadSimulations(// 5 users, 20 seconds
                 Simulation.KeepConstant(5, TimeSpan.FromSeconds(20))
             );
-            NBomberRunner
-                .RegisterScenarios(scenario)
-                .WithReportFolder(@"..\..\..\bomber_reports")
-                .WithReportFormats(ReportFormat.Txt, ReportFormat.Html)
-                .Run();
 
             return scenario;
         }

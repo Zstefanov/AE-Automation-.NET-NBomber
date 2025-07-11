@@ -1,5 +1,6 @@
 ﻿using AE_extensive_project.PerformanceTests.Models;
 using NBomber.Contracts;
+using NBomber.Contracts.Stats;
 using NBomber.CSharp;
 using System.Net;
 
@@ -9,7 +10,9 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
     {
         public static ScenarioProps CreateScenario(List<UserCredentials> users)
         {
-            return Scenario.Create("cart_operations", async context =>
+            var baseUrl = "https://automationexercise.com";
+
+            var scenario = Scenario.Create("cart_operations", async context =>
             { 
                 // Retrieve a random user for each request
                 var user = users[Random.Shared.Next(users.Count)];
@@ -105,6 +108,16 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
             .WithLoadSimulations(
                 Simulation.KeepConstant(4, TimeSpan.FromSeconds(20))
             );
+
+            // Extracted to the program.cs class to generate a report for all scenarios
+            //NBomberRunner
+            //    .RegisterScenarios(scenario)
+            //    .WithReportFolder(@"..\..\..\bomber_reports")
+            //    .WithReportFormats(ReportFormat.Txt, ReportFormat.Html)
+            //    .WithReportFileName("cart_operations_report")
+            //    .Run();
+
+            return scenario;
         }
     }
 }
