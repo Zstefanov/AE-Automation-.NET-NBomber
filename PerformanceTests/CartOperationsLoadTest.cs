@@ -1,6 +1,5 @@
 ﻿using AE_extensive_project.PerformanceTests.Models;
 using NBomber.Contracts;
-using NBomber.Contracts.Stats;
 using NBomber.CSharp;
 using System.Net;
 

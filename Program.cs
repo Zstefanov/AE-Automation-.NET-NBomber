@@ -23,19 +23,30 @@ namespace AE_extensive_project.PerformanceTests
             var scenarios = new[] {
                 HomePageLoadTest.CreateScenario(),
                 LoginLoadTest.CreateScenario(users),
-                //UserRegistrationLoadTest.CreateScenario(),
-                //ProductSearchLoadTest.CreateScenario(),
-                //OrderPlacementLoadTest.CreateScenario(users),
-                //CartOperationsLoadTest.CreateScenario(users),
-                //GetProductEndpointLoadTest.CreateScenario()
+                UserRegistrationLoadTest.CreateScenario(),
+                ProductSearchLoadTest.CreateScenario(),
+                OrderPlacementLoadTest.CreateScenario(users),
+                CartOperationsLoadTest.CreateScenario(users),
+                GetProductEndpointLoadTest.CreateScenario()
             };
 
-            NBomberRunner
-                .RegisterScenarios(scenarios)
-                .WithReportFolder(@"..\..\..\bomber_reports")
-                .WithReportFormats(ReportFormat.Html, ReportFormat.Txt)
-                .WithReportFileName("performance_report")
-                .Run();
+            foreach (var scenario in scenarios)
+            {
+                Console.WriteLine($"Currently running scenario: {scenario.ScenarioName}");
+                NBomberRunner
+                    .RegisterScenarios(scenarios)
+                    .WithReportFolder(@"..\..\..\bomber_reports")
+                    .WithReportFormats(ReportFormat.Html, ReportFormat.Txt)
+                    .WithReportFileName("performance_report")
+                    .Run();
+            }
+
+            //NBomberRunner
+            //    .RegisterScenarios(scenarios)
+            //    .WithReportFolder(@"..\..\..\bomber_reports")
+            //    .WithReportFormats(ReportFormat.Html, ReportFormat.Txt)
+            //    .WithReportFileName("performance_report")
+            //    .Run();
         }
 
         // Load users from JSON file in Data folder once here, to be used in all tests
