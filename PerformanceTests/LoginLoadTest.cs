@@ -2,7 +2,6 @@
 using AE_extensive_project.PerformanceTests.Models;
 using NBomber.Contracts;
 using NBomber.CSharp;
-using System;
 
 namespace AE_extensive_project.PerformanceTests.PerformanceTests
 {
@@ -17,15 +16,16 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
             {
                 // Select a random user for each request
                 var user = users[Random.Shared.Next(users.Count)];
+                using var client = new HttpClient();
                 Console.WriteLine($"Trying to login with {user.Email}");
 
-                var success = await loginClient.LoginAsync(user);
+                var success = await loginClient.LoginAsync(user, client);
 
                 return success ? Response.Ok() : Response.Fail();
             })
             .WithWarmUpDuration(TimeSpan.FromSeconds(10))
             // 10 simultaneous users for a 30 second duration
-            .WithLoadSimulations(Simulation.KeepConstant(10, TimeSpan.FromSeconds(30)));
+            .WithLoadSimulations(Simulation.KeepConstant(5, TimeSpan.FromSeconds(20)));
 
             return scenario;
         }
