@@ -21,12 +21,12 @@ namespace AE_extensive_project.PerformanceTests
             // Comment out and only run some scenarios for convenience:
             var scenarios = new[] {
                 //HomePageLoadTest.CreateScenario(),
-                //LoginLoadTest.CreateScenario(users),
+                LoginLoadTest.CreateScenario(users),
                 //UserRegistrationLoadTest.CreateScenario(),
                 //ProductSearchLoadTest.CreateScenario(),
                 //OrderPlacementLoadTest.CreateScenario(users),
                 //CartOperationsLoadTest.CreateScenario(users),
-                GetProductEndpointLoadTest.CreateScenario()
+                //GetProductEndpointLoadTest.CreateScenario()
             };
 
             NBomberRunner
