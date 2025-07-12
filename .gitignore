@@ -5,6 +5,7 @@ Debug/
 Release/
 TestResults/
 playwright-report/
+bomber_reports/
 
 ## IDE folders
 .vs/
