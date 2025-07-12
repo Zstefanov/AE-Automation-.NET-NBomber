@@ -1,4 +1,5 @@
-﻿using AE_extensive_project.PerformanceTests.Models;
+﻿using AE_extensive_project.PerformanceTests.Helpers;
+using AE_extensive_project.PerformanceTests.Models;
 using NBomber.Contracts;
 using NBomber.CSharp;
 using System.Net;
@@ -10,6 +11,9 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
     {
         public static ScenarioProps CreateScenario(List<UserCredentials> users)
         {
+            // Initialize the login helper
+            var loginHelper = new LoginHelper();
+
             var scenario = Scenario.Create("checkout_order_placement", async context =>
             {
                 // Pick a random user for this order simulation
@@ -24,29 +28,21 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
                 // 1. NAVIGATE TO HOME (GET)
                 await client.GetAsync(baseUrl);
 
-                // 2. LOGIN via API (POST /api/verifyLogin)
-                var loginContent = new FormUrlEncodedContent(new[]
+                // 2. LOGIN via LoginHelper (POST)
+                var loginSuccess = await loginHelper.LoginAsync(user, client);
+                if (loginSuccess)
                 {
-                    new KeyValuePair<string, string>("email", user.Email),
-                    new KeyValuePair<string, string>("password", user.Password)
-                });
-                
-                var loginResponse = await client.PostAsync($"{baseUrl}/api/verifyLogin", loginContent);
-
-                var loginBody = await loginResponse.Content.ReadAsStringAsync();
-
-                if (loginResponse.IsSuccessStatusCode && loginBody.Contains("User exists"))
-                {
-                    Console.WriteLine($"LOGIN SUCCESS: {user.Email}");
+                    Console.WriteLine($"Login Success: {user.Email}");
                 }
                 else
                 {
-                    Console.WriteLine($"LOGIN FAILED: {user.Email} | Status: {loginResponse.StatusCode} | Body: {loginBody}");
-                    return Response.Fail();
+                    Console.WriteLine($"Login Failed: {user.Email}");
+                    return Response.Fail(message: "Login failed.");
                 }
 
                 // 3. ADD PRODUCT TO CART (GET)
                 var productId = Random.Shared.Next(1, 5); // Hardcoded product IDs from 1 to 5
+
                 var addToCartResponse = await client.GetAsync($"{baseUrl}/add_to_cart/{productId}");
                 if (addToCartResponse.IsSuccessStatusCode)
                 {
@@ -108,7 +104,7 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
             })
             .WithWarmUpDuration(TimeSpan.FromSeconds(5))
             .WithLoadSimulations(
-                Simulation.KeepConstant(3, TimeSpan.FromSeconds(15))
+                Simulation.KeepConstant(3, TimeSpan.FromSeconds(10))
             );
             return scenario;
         }

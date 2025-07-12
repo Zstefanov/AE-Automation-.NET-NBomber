@@ -24,8 +24,8 @@ namespace AE_extensive_project.PerformanceTests
                 //LoginLoadTest.CreateScenario(users),
                 //UserRegistrationLoadTest.CreateScenario(),
                 //ProductSearchLoadTest.CreateScenario(),
-                //OrderPlacementLoadTest.CreateScenario(users),
-                CartOperationsLoadTest.CreateScenario(users),
+                OrderPlacementLoadTest.CreateScenario(users),
+                //CartOperationsLoadTest.CreateScenario(users),
                 //GetProductEndpointLoadTest.CreateScenario()
             };
 
