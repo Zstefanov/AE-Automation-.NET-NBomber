@@ -21,4 +21,8 @@
     <Folder Include="bomber_reports\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include=".github\workflows\nbomber.yml" />
+  </ItemGroup>
+
 </Project>

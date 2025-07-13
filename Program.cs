@@ -22,13 +22,12 @@ namespace AE_extensive_project.PerformanceTests
             var scenarios = new[] {
                 //HomePageLoadTest.CreateScenario(),
                 //LoginLoadTest.CreateScenario(users),
-                UserRegistrationLoadTest.CreateScenario(),
+                //UserRegistrationLoadTest.CreateScenario(),
                 //ProductSearchLoadTest.CreateScenario(),
                 //OrderPlacementLoadTest.CreateScenario(users),
                 //CartOperationsLoadTest.CreateScenario(users),
-                //GetProductEndpointLoadTest.CreateScenario(),
-                
-
+                //GetProductEndpointLoadTest.CreateScenario(),\
+                LoginNegativeTest.CreateScenario(),
             };
 
             NBomberRunner
