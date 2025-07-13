@@ -1,12 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿name: NBomber Performance Tests
 
-namespace AE_extensive_project.PerformanceTests.github
-{
-    class nbomber
-    {
-    }
-}
+on:
+  workflow_dispatch: # allows manual runs
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  nbomber-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run NBomber performance tests
+      run: dotnet run --project AE_extensive_project.PerformanceTests/AE_extensive_project.PerformanceTests.csproj
+      
+
+    - name: Upload NBomber reports (HTML/TXT)
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: nbomber-reports
+        path: AE_extensive_project.PerformanceTests/bomber_reports/
