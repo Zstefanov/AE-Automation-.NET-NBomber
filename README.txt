@@ -30,6 +30,12 @@ Requirements:
 - .NET 9.0
 - NBomber NuGet package (already included in the project)
 
+Coverage:
+--------------
+This project includes comprehensive performance tests for the Automation Exercise website, covering various load scenarios such as:	
+Login, Registration, Product Browsing, Cart Operations, Checkout, etc. There are positive and negative scenarios.
+
+
 CI/CD:
 --------------
 - This project is integrated with GitHub Actions for CI/CD.
@@ -43,4 +49,4 @@ References:
 
 Author:
 --------
-Zstefanov
+Zs73fnv
