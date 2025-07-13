@@ -8,6 +8,7 @@ namespace AE_extensive_project.PerformanceTests.PerformanceTests
 {
     public static class UserRegistrationNegativeTest
     {
+        // We expect the test results to be correct, e.g. 200 response, cause they fail as we EXPECT them to fail
         public static ScenarioProps CreateScenario(List<UserCredentials> registeredUsers)
         {
             var scenario = Scenario.Create("user_registration_negative_already_used_email", async context =>
