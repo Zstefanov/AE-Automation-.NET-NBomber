@@ -13,8 +13,8 @@ namespace AE_extensive_project.PerformanceTests
             var users = LoadUsers();
 
             // Print deserialized objects
-            foreach (var user in users)
-                Console.WriteLine($"- Email: '{user.Email ?? "null"}', Password: '{user.Password ?? "null"}'");
+            //foreach (var user in users)
+            //    Console.WriteLine($"- Email: '{user.Email ?? "null"}', Password: '{user.Password ?? "null"}'");
 
             Console.WriteLine($"Loaded {users.Count} users:");
 
