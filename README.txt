@@ -22,13 +22,18 @@ Getting Started:
 2. Navigate to the project directory and install dependencies:
    dotnet restore
 
-3. Run the performance tests:
+3. Run the performance tests(uncomment scenarios from the program.cs file to run different load tests):
    dotnet run
 
 Requirements:
 --------------
-- .NET 6.0 or newer
+- .NET 9.0
 - NBomber NuGet package (already included in the project)
+
+CI/CD:
+--------------
+- This project is integrated with GitHub Actions for CI/CD.
+- This project is deployed to Jenkins locally via the GitHub repository.
 
 References:
 ------------
