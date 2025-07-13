@@ -27,7 +27,8 @@ namespace AE_extensive_project.PerformanceTests
                 //OrderPlacementLoadTest.CreateScenario(users),
                 //CartOperationsLoadTest.CreateScenario(users),
                 //GetProductEndpointLoadTest.CreateScenario(),\
-                LoginNegativeTest.CreateScenario(),
+                //LoginNegativeTest.CreateScenario(),
+                UserRegistrationNegativeTest.CreateScenario(users) // Add CSRF token if needed
             };
 
             NBomberRunner
